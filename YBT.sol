@@ -48,10 +48,10 @@ contract YellowBetterToken {
     {
         return allowed[tokenOwner][spender];
     }
-    function burn(address tokenOwner, uint tokens)
+    function burn(uint tokens)
     {
-        balances[tokenOwner] = sub(balances[tokenOwner], tokens);
+        balances[msg.sender] = sub(balances[msg.sender], tokens);
         totalSupply -= tokens;
-        emit Burn(tokenOwner, tokens);
+        emit Burn(msg.sender, tokens);
     }
 }
