@@ -1,5 +1,6 @@
 pragma solidity ^0.4.24;
-contract YellowBetterToken {
+contract YellowBetterToken
+{
     string public constant name = "Yellow Better";
     string public constant symbol = "YBT";
     uint8 public constant decimals = 18;
@@ -10,9 +11,9 @@ contract YellowBetterToken {
     event Transfer(address indexed, address indexed, uint);
     event Approval(address indexed, address indexed, uint);
     event Burn(address indexed, uint);
-    constructor(address creator)
+    constructor()
     {
-        balances[creator] = totalSupply;
+        balances[msg.sender] = totalSupply;
     }
     function sub(uint a, uint b) private pure returns (uint)
     {
@@ -32,6 +33,7 @@ contract YellowBetterToken {
     }
     function transferFrom(address from, address to, uint tokens) returns (bool)
     {
+        // subtract tokens from both balance and allowance, fail if any is smaller
         balances[from] = sub(balances[from], tokens);
         allowed[from][msg.sender] = sub(allowed[from][msg.sender], tokens);
         balances[to] += tokens;
