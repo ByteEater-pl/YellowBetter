@@ -27,7 +27,7 @@ contract TokenSale
         require(
             block.timestamp < deadline
             && tokenPrice > 0
-            && ERC20Fragment(tokenContract).transfer(beneficiary, msg.value / tokenPrice));
+            && ERC20Fragment(tokenContract).transfer(beneficiary, 1000000000000000000 * msg.value / tokenPrice));
     }
     function payout()
     {
